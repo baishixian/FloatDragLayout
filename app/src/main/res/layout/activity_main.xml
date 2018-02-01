@@ -34,6 +34,16 @@
             android:layout_below="@+id/bt_change_to_no_title"
             android:layout_centerHorizontal="true"
             android:textAllCaps="false"
-            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
             android:text="Change To Windows Model"/>
+
+    <Button
+            android:id="@+id/bt_show_floatDragPopupWindow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bt_change_to_windows"
+            android:layout_centerHorizontal="true"
+            android:textAllCaps="false"
+            android:layout_margin="16dp"
+            android:text="Show FloatDragPopupWindow"/>
 </RelativeLayout>

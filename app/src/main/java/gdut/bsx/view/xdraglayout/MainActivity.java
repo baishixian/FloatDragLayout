@@ -7,9 +7,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import gdut.bsx.view.FloatDragLayout;
+import gdut.bsx.view.FloatDragPopupWindow;
 import gdut.bsx.view.utils.DisplayUtil;
 
 /**
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.bt_change_to_fullscreen).setOnClickListener(this);
         findViewById(R.id.bt_change_to_no_title).setOnClickListener(this);
         findViewById(R.id.bt_change_to_windows).setOnClickListener(this);
+        findViewById(R.id.bt_show_floatDragPopupWindow).setOnClickListener(this);
     }
 
     @Override
@@ -58,7 +61,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bt_change_to_windows :
                 startActivity(new Intent(MainActivity.this, WindowActivity.class));
                 break;
+            case R.id.bt_show_floatDragPopupWindow :
+               showFloatDragPopupWindow();
+                break;
                 default:break;
         }
+    }
+
+    FloatDragPopupWindow floatDragPopupWindow;
+    private void showFloatDragPopupWindow() {
+
+        if (floatDragPopupWindow == null) {
+            ImageView contentView = new ImageView(this);
+            contentView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            contentView.setImageResource(R.mipmap.ic_launcher_round);
+            floatDragPopupWindow = new FloatDragPopupWindow.Builder(this)
+                    .setContentView(contentView)
+                    .setPosition(0, 300)
+                    .setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(MainActivity.this, "点击了 FloatDragPopupWindow ", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .build();
+        }
+
+        floatDragPopupWindow.show();
     }
 }
