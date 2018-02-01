@@ -9,7 +9,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 27
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.1.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -51,7 +51,7 @@ allprojects {
 }
 
 def lib_name = "FloatDragLayout"
-version = "1.1.0"
+version = "1.1.1"
 group = "gdut.bsx"
 def siteUrl = 'https://github.com/baishixian/FloatDragLayout'
 def gitUrl = 'https://github.com/baishixian/FloatDragLayout.git'
