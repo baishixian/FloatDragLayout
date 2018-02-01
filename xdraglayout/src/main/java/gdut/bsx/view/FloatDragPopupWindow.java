@@ -174,7 +174,7 @@ public class FloatDragPopupWindow implements PopupWindow.OnDismissListener, View
             return;
         }
 
-        if (!isShowing()) {
+        if (!mActivity.isFinishing() && !isShowing()) {
 
             // 使用 post 避免父窗口 Activity 未初始化完成时就进行 showAtLocation ，
             // 导致出现 android.view.WindowManager$BadTokenException
@@ -223,7 +223,7 @@ public class FloatDragPopupWindow implements PopupWindow.OnDismissListener, View
         mContentView.removeCallbacks(mContentViewHideRunnable);
 
         // 延迟 1 秒钟进行
-        mContentView.postDelayed(mContentViewHideRunnable, 2000);
+        mContentView.postDelayed(mContentViewHideRunnable, 1000);
     }
 
     /**
@@ -272,6 +272,7 @@ public class FloatDragPopupWindow implements PopupWindow.OnDismissListener, View
      * 恢复存在感，悬浮窗口恢复正常状态
      */
     private void restoreTheSenseOfPresence() {
+        mContentView.removeCallbacks(mContentViewHideRunnable);
         updateContentLayoutParams(0, 0, 0, 0);
         mContentView.setAlpha(1.0f);
     }
@@ -475,6 +476,9 @@ public class FloatDragPopupWindow implements PopupWindow.OnDismissListener, View
                     moveToEdgeAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
                     moveToEdgeAnimator.setDuration(600);
                     moveToEdgeAnimator.start();
+                } else {
+                    // 点击完成后自动降低其存在感
+                    reduceTheSenseOfPresence();
                 }
                 break;
             default:break;
